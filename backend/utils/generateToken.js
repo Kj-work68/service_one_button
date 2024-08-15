@@ -6,4 +6,13 @@ const generateToken = (user) =>{
     });
 };
 
-module.exports = generateToken;
+const generateRefreshToken = (user, err) => {
+    if (err) return req.sendStatus(403)
+    const refreshToken = uuidv4();
+    // Store refreshToken securely in your database
+    return refreshToken
+    
+    
+}
+
+module.exports = {generateToken, generateRefreshToken};

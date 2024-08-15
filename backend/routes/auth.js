@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const generateToken = require('../utils/generateToken');
+const {generateToken, generateRefreshToken} = require('../utils/generateToken');
 const db = require('../database/dbconfig');
 require('dotenv').config();
 
@@ -18,9 +18,25 @@ router.post('/login', async (req, res) => {
         return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    const token = generateToken(user);
-    res.json({ token });
+    const generateAccessToken = generateToken(user);
+    const refreshToken = generateRefreshToken(user);
+    res.json({ generateAccessToken, refreshToken });
 });
+
+// Token Refresh Route
+router.post('/token', async (req, res) => {
+    const { refreshToken } = req.body;
+    // Verify refreshToken and issue new tokens
+    const user = await getUserByRefreshToken(refreshToken);
+    if (!user) return res.sendStatus(403);
+
+    const newAccessToken = generateAccessToken(user);
+    const newRefreshToken = generateRefreshToken(user);
+    // Update stored refreshToken
+
+    res.json({ accessToken: newAccessToken, refreshToken: newRefreshToken });
+});
+
 
 // Logout Route (In practice, you might handle this client-side)
 router.post('/logout', (req, res) => {
