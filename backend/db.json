@@ -1,0 +1,56 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "email": "admin1@gmail.com",
+        "password": "$2b$10$SNIxff2hecaoHk/Qs94VyOZ973APDrg3AVEfHdMl92/AdEPkpfWGC", 
+        "fname": "admin1",
+        "lname": "admin",
+        "roleId": 1
+      },
+      {
+        "id": 2,
+        "email": "user1@gmail.com",
+        "password": "$2b$10$abcd1234efgh5678ijkl9101mnopqrstuvwx3456yz7890abcd1234", 
+        "lname": "user",
+        "roleId": 2
+      },
+      {
+        "id": 3,
+        "email": "guest1@gmail.com",
+        "password": "$2b$10$abcd1234efgh5678ijkl9101mnopqrstuvwx3456yz7890abcd5678", 
+        "fname": "guest1",
+        "lname": "guest",
+        "roleId": 3
+      }
+    ],
+    "roles": [
+      {
+        "id": 1,
+        "role_name": "admin"
+      },
+      {
+        "id": 2,
+        "role_name": "user"
+      },
+      {
+        "id": 3,
+        "role_name": "guest"
+      }
+    ],
+    "userRoles": [
+      {
+        "userId": 1,
+        "roleId": 1
+      },
+      {
+        "userId": 2,
+        "roleId": 2
+      },
+      {
+        "userId": 3,
+        "roleId": 3
+      }
+    ]
+  }
+  

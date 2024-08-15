@@ -1,5 +1,9 @@
 const bcrypt = require('bcryptjs');
 
+const clients = [
+    { clientId: 'yourClientId', clientSecret: 'yourClientSecret', grants: ['password', 'refresh_token'] },
+];
+
 const users = [
     { id: 1, username: 'user1', password: bcrypt.hashSync('password1', 8) },
 ];
@@ -9,7 +13,11 @@ const model = {
         return { accessToken: token, client: {}, user: users[0] };
     },
     getClient: async (clientId, clientSecret) => {
-        return { clientId, clientSecret, grants: ['password', 'refresh_token'] };
+        const client = clients.find(c => c.clientId === clientId && c.clientSecret === clientSecret);
+        if (client) {
+            return client;
+        }
+        return false;
     },
     saveToken: async (token, client, user) => {
         return { accessToken: token, client, user };
