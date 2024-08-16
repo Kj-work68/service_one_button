@@ -1,17 +1,10 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const authRoutes = require('./routes/auth');
-const profileRoutes = require('./routes/profile');
+const express = require('express')
+const mysql = require('./database/dbconfig')
+const app = express()
+const port = 3000
 
-require('dotenv').config();
 
-const app = express();
-app.use(bodyParser.json());
 
-app.use('/auth', authRoutes);
-app.use('/profile', profileRoutes);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+app.get('/', (req, res) => res.send('Hello World!'))
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
